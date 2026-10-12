@@ -78,6 +78,8 @@ def main():
         units.append({
             "id": o.get("internal-id"),
             "number": txt(o, "number"),
+            "complex": txt(o, "object/name"),
+            "complex_id": txt(o, "object/id"),
             "house": txt(o, "house/name"),
             "house_id": txt(o, "house/id"),
             "section": txt(o, "building-section"),
@@ -97,7 +99,7 @@ def main():
             "address": txt(o, "object/location/address"),
         })
 
-    units.sort(key=lambda u: (u["house"], u["section"], u["number"]))
+    units.sort(key=lambda u: (u["complex"], u["house"], u["section"], u["number"]))
 
     # защита: пустой/сломанный фид не должен затирать рабочий JSON
     if len(units) < 1:
